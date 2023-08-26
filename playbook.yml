@@ -1,0 +1,40 @@
+---
+- name: Node xporter via ansible monitoring 
+  hosts: all
+  become: true
+  vars: 
+    node_exporter_version: 1.6.1
+
+  tasks:
+    - name: install node exporter
+      get_url:
+        url: https://github.com/prometheus/node_exporter/releases/download/v{{node_exporter_version}}/node_exporter-{{node_exporter_version}}.linux-amd64.tar.gz
+        dest: /tmp/
+
+    - name: Unzip node exporter file.tar.gz
+      unarchive:
+        remote_src: true
+        src: /tmp/node_exporter-{{node_exporter_version}}.linux-amd64.tar.gz
+        dest: /tmp/
+
+    - name: Move Node exporter executable
+      copy:
+        remote_src: true
+        src: /tmp/node_exporter-{{node_exporter_version}}.linux-amd64/node_exporter
+        dest: /usr/local/bin/node_exporter
+        owner: root
+        group: root
+        mode: 0755
+    - name:  Service Template
+      template:
+        src: node_exporter.service.me
+        dest: /etc/systemd/system/node_exporter.service
+        owner: root
+        group: root
+        mode: 0600
+    - name: Configure systemd service
+      systemd: 
+        daemon_reload: yes
+        enabled: yes
+        state: started
+        name: node_exporter.service
