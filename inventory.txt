@@ -1,0 +1,4 @@
+[servers]
+server_1 ansible_host=<server-1_public-ip>
+server_2 ansible_host=<server-2_public-ip>
+server_3 ansible_host=<server-3_public-ip>
