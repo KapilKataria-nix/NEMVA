@@ -6,7 +6,7 @@ This project focuses on implementing a robust solution for real-time server moni
 
 ## Features
 
-. Node Exporter Monitoring: Utilize Ansible for deploying Node Exporter, capturing crucial server metrics.
+ ### Node Exporter Monitoring: Utilize Ansible for deploying Node Exporter, capturing crucial server metrics.
 . Prometheus and Grafana Integration: Seamlessly integrate Prometheus and Grafana for real-time monitoring insights.
 . CPU Threshold Alerts: Configure CPU threshold alerts (>70%) with email notifications for prompt issue resolution.
 
